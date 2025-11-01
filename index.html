@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #ffd6e8 0%, #ffe5f0 50%, #d4f1e8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '♥';
+            position: absolute;
+            font-size: 100px;
+            color: rgba(255,182,193,0.1);
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '♥';
+            position: absolute;
+            font-size: 80px;
+            color: rgba(168,213,186,0.1);
+            bottom: 15%;
+            right: 15%;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 1.2s ease-in;
+        }
+
+        .page.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Password Page */
+        .password-card {
+            background: linear-gradient(135deg, #fff 0%, #fff5f8 100%);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(255,182,193,0.3);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            border: 3px solid transparent;
+            background-image: linear-gradient(white, white), 
+                              linear-gradient(135deg, #ffb6c1, #a8d5ba);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .password-card::before {
+            content: '♥';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: rgba(255,182,193,0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .password-card::after {
+            content: '♥';
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            font-size: 25px;
+            color: rgba(168,213,186,0.2);
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .password-card h1 {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #ff8fab 0%, #6b9080 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .password-card p {
+            color: #8a8a8a;
+            margin-bottom: 30px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            font-weight: 300;
+            position: relative;
+        }
+
+        .hint {
+            color: #ff8fab;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            font-weight: 400;
+        }
+
+        .password-card input {
+            width: 100%;
+            padding: 18px 25px;
+            background: #fff;
+            border: 2px solid #ffc9d9;
+            border-radius: 15px;
+            font-size: 16px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            color: #5a5a5a;
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .password-card input:focus {
+            outline: none;
+            border-color: #ff8fab;
+            background: #fffafc;
+            box-shadow: 0 0 25px rgba(255,182,193,0.3);
+        }
+
+        .password-card input::placeholder {
+            color: #d0a5b0;
+        }
+
+        .password-card button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff8fab 0%, #ffb6c1 50%, #a8d5ba 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(255,182,193,0.4);
+        }
+
+        .password-card button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(255,182,193,0.5);
+        }
+
+        .error {
+            color: #ff6b9d;
+            margin-top: 15px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        /* Song Page */
+        .song-page {
+            background: linear-gradient(135deg, #ffd6e8 0%, #ffe5f0 50%, #d4f1e8 100%);
+            flex-direction: column;
+            text-align: center;
+            color: #5a5a5a;
+        }
+
+        .song-container {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(255,182,193,0.3);
+            max-width: 650px;
+            width: 100%;
+            border: 3px solid transparent;
+            background-image: linear-gradient(white, white), 
+                              linear-gradient(135deg, #ffb6c1, #a8d5ba);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            position: relative;
+        }
+
+        .song-container::before {
+            content: '♥ ♥ ♥';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: rgba(255,182,193,0.3);
+            letter-spacing: 10px;
+        }
+
+        .song-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 40px;
+            border: 5px solid transparent;
+            background-image: linear-gradient(white, white), 
+                              linear-gradient(135deg, #ff8fab, #a8d5ba);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 20px 60px rgba(255,182,193,0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+.song-text {
+       font-family: 'Playfair Display', serif;
+       font-size: 22px;
+       line-height: 2;
+       margin: 30px 0;
+       color: #2a2a2a;
+       font-weight: 500;
+       letter-spacing: 1px;
+   }
+
+   .song-text p {
+       margin: 20px 0;
+       color: #2a2a2a;
+       opacity: 0;
+       animation: slideIn 0.8s ease forwards;
+   }
+
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .next-btn {
+            margin-top: 40px;
+            padding: 16px 50px;
+            background: linear-gradient(135deg, #ff8fab 0%, #ffb6c1 50%, #a8d5ba 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(255,182,193,0.4);
+        }
+
+        .next-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,182,193,0.5);
+        }
+
+        /* Final Page */
+        .final-page {
+            background: linear-gradient(135deg, #ffe5f0 0%, #ffd6e8 50%, #d4f1e8 100%);
+            flex-direction: column;
+            text-align: center;
+            color: #5a5a5a;
+        }
+
+        .final-container {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 80px 60px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(255,182,193,0.3);
+            max-width: 800px;
+            width: 100%;
+            border: 3px solid transparent;
+            background-image: linear-gradient(white, white), 
+                              linear-gradient(135deg, #ffb6c1, #a8d5ba);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            position: relative;
+        }
+
+        .final-container::before {
+            content: '♥ ♥ ♥ ♥ ♥';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 25px;
+            color: rgba(255,182,193,0.2);
+            letter-spacing: 15px;
+        }
+
+        .final-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ff8fab 0%, #6b9080 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .final-container p {
+            font-family: 'Lato', sans-serif;
+            font-size: 20px;
+            line-height: 2;
+            color: #7a7a7a;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .hearts {
+            font-size: 60px;
+            margin: 30px 0;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255,182,193,0.5));
+            background: linear-gradient(135deg, #ff8fab, #a8d5ba);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Audio Player Styling */
+        audio {
+            margin: 30px 0;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Page -->
+    <div class="page active" id="passwordPage">
+        <div class="password-card">
+            <h1>For You ❤️</h1>
+            <p>Enter the password to unlock your surprise</p>
+            <div class="hint">Hint: your favorite nickname</div>
+            <input type="password" id="passwordInput" placeholder="Password">
+            <button onclick="checkPassword()">Enter</button>
+            <div class="error" id="errorMsg"></div>
+        </div>
+    </div>
+
+    <!-- Song Page -->
+    <div class="page" id="songPage">
+        <div class="song-page">
+            <div class="song-container">
+                <img src="photo_2025-11-01_23-30-09.jpg" 
+                     alt="romantic moment" 
+                     class="song-image">
+                
+                <audio id="songAudio" controls>
+                    <source src="Albumaty.Com_tww_lyt_hsyny.mp3" type="audio/mpeg">
+                </audio>
+
+                <div class="song-text">
+                    <p>Since the day we started </p>
+                    <p>talking, there hasn't been a</p>
+                    <p>night where i didn't fall</p>
+                    <p>asleep thinking about you.</p>
+                </div>
+
+                <button class="next-btn" onclick="goToFinalPage()">Continue →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Page -->
+    <div class="page" id="finalPage">
+        <div class="final-page">
+            <div class="final-container">
+                <h1>One Love for Life</h1>
+                <div class="hearts">♥</div>
+                <p>
+                    From the first moment I saw you, I knew you were special<br>
+                    My love for you isn't just a feeling, it's my whole life<br>
+                    Every moment with you is a beautiful memory<br>
+                    And every day ahead is brighter with you in it<br><br>
+                    I love you more than words can say
+                </p>
+                <div class="hearts">∞</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "Mory";
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if (input === correctPassword) {
+                document.getElementById('passwordPage').classList.remove('active');
+                document.getElementById('songPage').classList.add('active');
+                
+                const audio = document.getElementById('songAudio');
+                audio.play().catch(e => console.log('Click play to start the music'));
+            } else {
+                errorMsg.textContent = 'Incorrect password. Try again.';
+            }
+        }
+
+        function goToFinalPage() {
+            document.getElementById('songPage').classList.remove('active');
+            document.getElementById('finalPage').classList.add('active');
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
